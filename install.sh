@@ -10,7 +10,7 @@ curl -fsSL https://codeload.github.com/kristiangogov/fedora-setup/tar.gz/main -o
 
 tar -xzf setup.tar.gz
 
-cd dotfiles-main
+cd fedora-setup-main
 
 chmod +x setup.sh
 
