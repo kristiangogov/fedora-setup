@@ -35,12 +35,6 @@ setup_multimedia() {
     
     # Install Cisco OpenH264 codec
     sudo dnf install -y openh264 gstreamer1-plugin-openh264 mozilla-openh264
-    
-    # Enable Cisco repo (requires dnf-plugins-core)
-    if ! command -v dnf &>/dev/null || ! rpm -q dnf-plugins-core &>/dev/null; then
-        sudo dnf install -y dnf-plugins-core
-    fi
-    sudo dnf config-manager --set-enabled fedora-cisco-openh264
 }
 
 setup_utilities() {
