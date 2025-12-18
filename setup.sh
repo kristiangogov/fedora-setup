@@ -7,91 +7,62 @@ source ./modules/apps.sh
 source ./modules/configure.sh
 source ./modules/fonts.sh
 
+prompt() {
+    local prompt="$1"
+    local response
+    read -rp "$prompt [Y/n]: " response
+    case "${response,,}" in
+        n|no) return 1 ;;
+        *) return 0 ;;
+    esac
+}
+
+setup_system() {
+    prompt "Run system updates?" && update
+    prompt "Check for firmware updates?" && update_firmware
+}
+
+setup_essentials() {
+    prompt "Set up Flatpak with Flathub?" && setup_flatpak
+    prompt "Install multimedia codecs and drivers?" && setup_multimedia
+    prompt "Install compression utilities and FUSE?" && setup_utilities
+    prompt "Set up Snapper for system snapshots?" && setup_snapper
+    prompt "Apply system optimizations?" && optimize_system
+}
+
+install_applications() {
+    echo ""
+    echo "Application Installation:"
+    
+    prompt "  Install VS Code?" && setup_vscode
+    prompt "  Install Brave Browser?" && setup_brave
+    prompt "  Install media apps (VLC, OBS)?" && setup_media_apps
+    prompt "  Install OnlyOffice?" && setup_productivity_apps
+    prompt "  Install Konsave?" && setup_konsave
+    prompt "  Install Zen Browser?" && setup_zen
+}
+
+configure_system() {
+    echo ""
+    echo "Configuration:"
+    
+    prompt "  Restore KDE settings (Konsave)?" && restore_kde_settings
+    prompt "  Configure Git?" && setup_git
+    prompt "  Set up SSH key for GitHub?" && setup_ssh
+    prompt "  Install Fonts?" && install_fonts
+}
+
 main() {
     echo "===================================="
     echo "  Fedora 43 Post-Install Setup"
     echo "===================================="
     echo ""
     
-    # System updates
-    read -rp "Run system updates? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        update
-    fi
+    setup_system
+    setup_essentials
     
-    # Firmware updates
-    read -rp "Check for firmware updates? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        update_firmware
-    fi
-    
-    echo ""
-    
-    # Flatpak setup
-    read -rp "Set up Flatpak with Flathub? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        setup_flatpak
-    fi
-    
-    # Multimedia codecs
-    read -rp "Install multimedia codecs and drivers? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        setup_multimedia
-    fi
-    
-    # Utilities
-    read -rp "Install compression utilities and FUSE? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        setup_utilities
-    fi
-    
-    # Snapper
-    read -rp "Set up Snapper for system snapshots? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        setup_snapper
-    fi
-    
-    # System optimizations
-    read -rp "Apply system optimizations? [Y/n]: " answer
-    if [[ ! "$answer" =~ ^[Nn]$ ]]; then
-        optimize_system
-    fi
-    
-    echo ""
-    echo "Application Installation:"
-    
-    read -rp "  Install VS Code? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_vscode
-    
-    read -rp "  Install Brave Browser? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_brave
-    
-    read -rp "  Install media apps (VLC, OBS)? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_media_apps
-    
-    read -rp "  Install OnlyOffice? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_productivity_apps
-    
-    read -rp "  Install Konsave? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_konsave
-    
-    read -rp "  Install Zen Browser? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_zen
-    
-    echo ""
-    echo "Configuration:"
-    
-    read -rp "  Restore KDE settings (Konsave)? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && restore_kde_settings
-    
-    read -rp "  Configure Git? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_git
-    
-    read -rp "  Set up SSH key for GitHub? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && setup_ssh
-    
-    read -rp "  Install Fonts? [Y/n]: " answer
-    [[ ! "$answer" =~ ^[Nn]$ ]] && install_fonts
+    install_applications
+    configure_system
     
     echo ""
     echo "===================================="
