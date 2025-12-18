@@ -5,6 +5,7 @@ source ./modules/update.sh
 source ./modules/essentials.sh
 source ./modules/apps.sh
 source ./modules/configure.sh
+source ./modules/fonts.sh
 
 main() {
     echo "===================================="
@@ -76,7 +77,7 @@ main() {
     
     read -rp "  Install Zen Browser? [Y/n]: " answer
     [[ ! "$answer" =~ ^[Nn]$ ]] && setup_zen
-
+    
     echo ""
     echo "Configuration:"
     
@@ -88,7 +89,10 @@ main() {
     
     read -rp "  Set up SSH key for GitHub? [Y/n]: " answer
     [[ ! "$answer" =~ ^[Nn]$ ]] && setup_ssh
-
+    
+    read -rp "  Install Fonts? [Y/n]: " answer
+    [[ ! "$answer" =~ ^[Nn]$ ]] && install_fonts
+    
     echo ""
     echo "===================================="
     echo "  Setup Complete!"
