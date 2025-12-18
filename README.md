@@ -32,7 +32,8 @@ curl -L https://codeload.github.com/kristiangogov/fedora-setup/tar.gz/main | tar
     ├── update.sh         # System and firmware updates
     ├── essentials.sh     # Flatpak, multimedia, utilities, Snapper
     ├── apps.sh           # Application installation
-    └── configure.sh      # Git, SSH, GitHub, Konsave
+    ├── configure.sh      # Git, SSH, GitHub, Konsave
+    └── fonts.sh          # Installs fonts from .zip files
 ```
 
 ## Requirements
@@ -69,8 +70,12 @@ Each module is independent and can be run separately. Edit `setup.sh` to comment
 ## Backups
 
 The script uses:
-- **Konsave** for KDE settings backup/restore
+- **Konsave** for KDE settings backup/restore (requires a konsave profile export, obviously)
 - **Snapper** for system snapshots (configure separately)
+
+## Fonts
+
+- Local set of font archives
 
 ## Notes
 
