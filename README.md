@@ -18,9 +18,9 @@ chmod +x setup.sh
 
 The script will prompt you for each step - just press Enter to accept (default is Yes) or type `n` to skip.
 
-Or one-liner:
+No git download:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kristiangogov/fedora-setup/main/install.sh | bash
+curl -L https://codeload.github.com/kristiangogov/fedora-setup/tar.gz/main | tar -xz
 ```
 
 ## Structure
