@@ -18,19 +18,11 @@ setup_vscode() {
 setup_brave() {
     echo "==> Installing Brave Browser..."
     
-    # Ensure dnf-plugins-core is installed
-    if ! rpm -q dnf-plugins-core &>/dev/null; then
-        sudo dnf install -y dnf-plugins-core
-    fi
+    sudo dnf install dnf-plugins-core
     
-    # Add Brave repository
-    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
     
-    # Import Brave GPG key
-    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    
-    # Install Brave
-    sudo dnf install -y brave-browser
+    sudo dnf install brave-browser -y
 }
 
 setup_zen() {
