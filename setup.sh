@@ -6,6 +6,7 @@ source ./modules/essentials.sh
 source ./modules/apps.sh
 source ./modules/configure.sh
 source ./modules/fonts.sh
+source ./modules/personalize.sh
 
 prompt() {
     local prompt="$1"
@@ -20,6 +21,7 @@ prompt() {
 setup_system() {
     prompt "Run system updates?" && update
     prompt "Check for firmware updates?" && update_firmware
+    return 0
 }
 
 setup_essentials() {
@@ -28,6 +30,7 @@ setup_essentials() {
     prompt "Install compression utilities and FUSE?" && setup_utilities
     prompt "Set up Snapper for system snapshots?" && setup_snapper
     prompt "Apply system optimizations?" && optimize_system
+    return 0
 }
 
 install_applications() {
@@ -40,6 +43,7 @@ install_applications() {
     prompt "  Install OnlyOffice?" && setup_productivity_apps
     prompt "  Install Konsave?" && setup_konsave
     prompt "  Install Zen Browser?" && setup_zen
+    return 0
 }
 
 configure_system() {
@@ -50,6 +54,15 @@ configure_system() {
     prompt "  Configure Git?" && setup_git
     prompt "  Set up SSH key for GitHub?" && setup_ssh
     prompt "  Install Fonts?" && install_fonts
+    return 0
+}
+
+personalize() {
+    echo ""
+    echo "Personalization:"
+
+    prompt "  Personalize VS Code?" && personalize_vscode
+    return 0
 }
 
 main() {
@@ -63,6 +76,8 @@ main() {
     
     install_applications
     configure_system
+
+    personalize
     
     echo ""
     echo "===================================="
