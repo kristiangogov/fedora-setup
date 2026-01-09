@@ -1,6 +1,6 @@
 # Fedora Setup Scripts
 
-Automated post-installation setup for Fedora 43 KDE Plasma.
+Automated post-installation setup for Fedora 43 KDE Plasma. Based on the [Fedora-Noble-Setup](https://github.com/wz790/Fedora-Noble-Setup).
 
 ## Quick Start
 
